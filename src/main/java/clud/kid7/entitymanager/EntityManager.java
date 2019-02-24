@@ -9,7 +9,7 @@ public final class EntityManager extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-
+        getServer().getPluginManager().registerEvents(new EntityListener(this), this);
     }
 
     @Override
