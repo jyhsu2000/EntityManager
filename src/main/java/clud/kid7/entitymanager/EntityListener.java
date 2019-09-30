@@ -20,6 +20,7 @@ public class EntityListener implements Listener {
         CreatureSpawnEvent.SpawnReason spawnReason = event.getSpawnReason();
         //只處理丟雞蛋與繁殖
         if (spawnReason != CreatureSpawnEvent.SpawnReason.EGG
+            && spawnReason != CreatureSpawnEvent.SpawnReason.SPAWNER_EGG
             && spawnReason != CreatureSpawnEvent.SpawnReason.DISPENSE_EGG
             && spawnReason != CreatureSpawnEvent.SpawnReason.BREEDING) {
             return;
