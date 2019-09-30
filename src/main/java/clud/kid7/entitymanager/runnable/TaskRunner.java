@@ -85,7 +85,7 @@ public class TaskRunner implements Runnable {
             }
             // 若佇列已空，暫停一段時間
             if (chunkQueue.isEmpty()) {
-                EntityManager.instance.getLogger().info("Entity clear done");
+                EntityManager.instance.getLogger().info(MessageFormat.format("Entity clear done. Next round will started in {0}", runInterval));
                 nextRunInstant = Instant.now().plus(runInterval);
             }
         }
