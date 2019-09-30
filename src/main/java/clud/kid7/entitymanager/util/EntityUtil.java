@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EntityUtil {
+    public static final int EntityAmountLimitation = 16;
+    public static final int SingleTypeEntityAmountLimitation = 12;
+
     public static boolean checkChunkLimit(Entity entity) {
         Chunk chunk = entity.getChunk();
         //該區塊所有實體
@@ -21,11 +24,11 @@ public class EntityUtil {
             .collect(Collectors.toList());
         //計算生物數量
         long entityCount = livingEntities.size();
-        if (entityCount > 16) {
+        if (entityCount > EntityAmountLimitation) {
             return false;
         }
         //計算同種類生物數量
         long sameTypeEntityCount = livingEntities.stream().filter(entity1 -> entity1.getType() == entity.getType()).count();
-        return sameTypeEntityCount <= 12;
+        return sameTypeEntityCount <= SingleTypeEntityAmountLimitation;
     }
 }
