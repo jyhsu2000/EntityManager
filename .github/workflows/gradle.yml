@@ -4,9 +4,7 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Set up JDK 1.8
@@ -17,3 +15,7 @@ jobs:
       run: |
         chmod a+x gradlew
         ./gradlew build
+    - uses: actions/upload-artifact@master
+      with:
+        name: my-artifact
+        path: build/libs
