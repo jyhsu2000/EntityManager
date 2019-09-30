@@ -40,7 +40,7 @@ public class TaskRunner implements Runnable {
                 }).collect(Collectors.toList());
                 chunkQueue.addAll(nearByChunks);
             });
-            EntityManager.instance.getLogger().info(MessageFormat.format("Found {0} chunk(s) with excess entities", chunkQueue.size()));
+            EntityManager.instance.getLogger().info(MessageFormat.format("Found {0} chunk(s) may have excess entities", chunkQueue.size()));
             // 若佇列已空，暫停一段時間
             if (chunkQueue.isEmpty()) {
                 nextRunInstant = Instant.now().plus(runInterval);
