@@ -23,7 +23,7 @@ public class EntityListener implements Listener {
         }
         LivingEntity entity = event.getEntity();
         if (!EntityUtil.checkChunkLimit(entity)) {
-            ParticleUtil.playEffect(entity.getLocation(), Particle.CLOUD);
+            ParticleUtil.playEffect(entity.getLocation(), Particle.BARRIER);
             event.setCancelled(true);
         }
     }
