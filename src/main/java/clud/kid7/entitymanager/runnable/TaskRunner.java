@@ -8,13 +8,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Monster;
 
 import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -38,10 +35,7 @@ public class TaskRunner implements Runnable {
                 List<Chunk> nearByChunks = ChunkUtil.getNearByChunks(player.getChunk(), 4);
                 // 過濾出指定物種總數量超過單一物種限制者
                 nearByChunks = nearByChunks.stream().filter(chunk -> {
-                    List<Entity> entityInChunk = Arrays.stream(chunk.getEntities())
-                        .filter(entity1 -> entity1 instanceof LivingEntity)
-                        .filter(entity1 -> !(entity1 instanceof Monster))
-                        .collect(Collectors.toList());
+                    List<Entity> entityInChunk = EntityUtil.filterEntities(chunk.getEntities());
                     return entityInChunk.size() > EntityUtil.SingleTypeEntityAmountLimitation;
                 }).collect(Collectors.toList());
                 chunkQueue.addAll(nearByChunks);
@@ -59,13 +53,13 @@ public class TaskRunner implements Runnable {
         chunkQueue.removeAll(Collections.singleton(chunk));
         // 僅處理有載入的 Chunk
         if (chunk.isLoaded()) {
-            Entity[] entities = chunk.getEntities();
-//        EntityManager.instance.getLogger().info(MessageFormat.format("Chunk {0} has {1} entities", chunk, entities.length));
+            List<Entity> entities = EntityUtil.filterEntities(chunk.getEntities());
+//        EntityManager.instance.getLogger().info(MessageFormat.format("Chunk {0} has {1} entities", chunk, entities.size()));
             // 再次檢查，超過單一物種限制，才進行細節判斷
-            if (entities.length > EntityUtil.SingleTypeEntityAmountLimitation) {
+            if (entities.size() > EntityUtil.SingleTypeEntityAmountLimitation) {
                 // 處理單一物種超量
                 for (Entity entity : entities) {
-                    if (Arrays.stream(entities)
+                    if (entities.stream()
                         .filter(entity1 -> entity1.getType().equals(entity.getType())).count() > EntityUtil.SingleTypeEntityAmountLimitation) {
                         // 移除一隻
                         ParticleUtil.playEffect(entity.getLocation(), Particle.CLOUD);
@@ -78,9 +72,9 @@ public class TaskRunner implements Runnable {
                 }
 
                 // 處理總數超量
-                if (entities.length > EntityUtil.EntityAmountLimitation) {
+                if (entities.size() > EntityUtil.EntityAmountLimitation) {
                     // 移除一隻
-                    Entity entity = entities[0];
+                    Entity entity = entities.get(0);
                     ParticleUtil.playEffect(entity.getLocation(), Particle.CLOUD);
                     entity.remove();
                     // 將 Chunk 加回佇列，以確保盡快處理

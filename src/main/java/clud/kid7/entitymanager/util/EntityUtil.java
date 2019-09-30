@@ -1,8 +1,8 @@
 package clud.kid7.entitymanager.util;
 
 import org.bukkit.Chunk;
+import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 
 import java.util.Arrays;
@@ -18,17 +18,21 @@ public class EntityUtil {
         //該區塊所有實體
         Entity[] entities = chunk.getEntities();
         //該區塊所有非怪物生物
-        List<Entity> livingEntities = Arrays.stream(entities)
-            .filter(entity1 -> entity1 instanceof LivingEntity)
-            .filter(entity1 -> !(entity1 instanceof Monster))
-            .collect(Collectors.toList());
+        List<Entity> filteredEntities = filterEntities(entities);
         //計算生物數量
-        long entityCount = livingEntities.size();
+        long entityCount = filteredEntities.size();
         if (entityCount > EntityAmountLimitation) {
             return false;
         }
         //計算同種類生物數量
-        long sameTypeEntityCount = livingEntities.stream().filter(entity1 -> entity1.getType() == entity.getType()).count();
+        long sameTypeEntityCount = filteredEntities.stream().filter(entity1 -> entity1.getType() == entity.getType()).count();
         return sameTypeEntityCount <= SingleTypeEntityAmountLimitation;
+    }
+
+    public static List<Entity> filterEntities(Entity[] entities) {
+        return Arrays.stream(entities)
+            .filter(entity1 -> entity1 instanceof Creature)
+            .filter(entity1 -> !(entity1 instanceof Monster))
+            .collect(Collectors.toList());
     }
 }
