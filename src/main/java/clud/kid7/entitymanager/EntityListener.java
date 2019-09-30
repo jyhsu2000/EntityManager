@@ -10,12 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
 public class EntityListener implements Listener {
-    private EntityManager entityManager;
-
-    public EntityListener(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onCreatureSpawn(CreatureSpawnEvent event) {
         //生成原因
