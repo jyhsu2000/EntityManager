@@ -1,5 +1,7 @@
 package clud.kid7.entitymanager;
 
+import clud.kid7.entitymanager.util.EntityUtil;
+import clud.kid7.entitymanager.util.ParticleUtil;
 import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;

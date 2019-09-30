@@ -1,4 +1,4 @@
-package clud.kid7.entitymanager;
+package clud.kid7.entitymanager.util;
 
 import org.bukkit.Chunk;
 import org.bukkit.entity.Entity;
