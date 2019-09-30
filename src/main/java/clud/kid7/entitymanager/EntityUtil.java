@@ -21,11 +21,11 @@ public class EntityUtil {
             .collect(Collectors.toList());
         //計算生物數量
         long entityCount = livingEntities.size();
-        if (entityCount > 24) {
+        if (entityCount > 16) {
             return false;
         }
         //計算同種類生物數量
         long sameTypeEntityCount = livingEntities.stream().filter(entity1 -> entity1.getType() == entity.getType()).count();
-        return sameTypeEntityCount <= 16;
+        return sameTypeEntityCount <= 12;
     }
 }
