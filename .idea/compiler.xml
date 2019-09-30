@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="clud.kid7.EntityManager.main" target="1.8" />
       <module name="clud.kid7.EntityManager.test" target="1.8" />
+      <module name="EntityManager.main" target="1.8" />
+      <module name="EntityManager.test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
