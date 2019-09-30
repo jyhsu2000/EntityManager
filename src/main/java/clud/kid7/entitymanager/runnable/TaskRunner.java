@@ -40,7 +40,7 @@ public class TaskRunner implements Runnable {
                 }).collect(Collectors.toList());
                 chunkQueue.addAll(nearByChunks);
             });
-            EntityManager.instance.getLogger().info(MessageFormat.format("Found {0} chunk(s) may have excess entities", chunkQueue.size()));
+//            EntityManager.instance.getLogger().info(MessageFormat.format("Found {0} chunk(s) may have excess entities", chunkQueue.size()));
             // 若佇列已空，暫停一段時間
             if (chunkQueue.isEmpty()) {
                 nextRunInstant = Instant.now().plus(runInterval);
@@ -85,7 +85,7 @@ public class TaskRunner implements Runnable {
             }
             // 若佇列已空，暫停一段時間
             if (chunkQueue.isEmpty()) {
-                EntityManager.instance.getLogger().info(MessageFormat.format("Entity clear done. Next round will started in {0}", runInterval));
+//                EntityManager.instance.getLogger().info(MessageFormat.format("Entity clear done. Next round will started in {0}", runInterval));
                 nextRunInstant = Instant.now().plus(runInterval);
             }
         }
