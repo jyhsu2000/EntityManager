@@ -12,10 +12,6 @@ import java.util.stream.Collectors;
 public class EntityUtil {
     public static boolean checkChunkLimit(Entity entity) {
         Chunk chunk = entity.getChunk();
-        //無法取得者不處理
-        if (chunk == null) {
-            return true;
-        }
         //該區塊所有實體
         Entity[] entities = chunk.getEntities();
         //該區塊所有非怪物生物
