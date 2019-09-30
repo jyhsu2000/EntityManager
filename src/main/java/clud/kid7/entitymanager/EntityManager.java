@@ -15,7 +15,7 @@ public final class EntityManager extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EntityListener(), this);
 
         // 重複任務
-        taskRunnerTask = Bukkit.getScheduler().runTaskTimerAsynchronously(this, new TaskRunner(), 0L, 20L);
+        taskRunnerTask = Bukkit.getScheduler().runTaskTimer(this, new TaskRunner(), 0L, 20L);
 
         instance = this;
     }
