@@ -1,6 +1,5 @@
 package clud.kid7.entitymanager.runnable;
 
-import clud.kid7.entitymanager.EntityManager;
 import clud.kid7.entitymanager.util.ChunkUtil;
 import clud.kid7.entitymanager.util.EntityUtil;
 import clud.kid7.entitymanager.util.ParticleUtil;
@@ -9,7 +8,6 @@ import org.bukkit.Chunk;
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 
-import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Collections;
